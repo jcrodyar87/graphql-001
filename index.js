@@ -3,7 +3,8 @@ var { graphql, buildSchema } = require('graphql');
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
-    hello: String
+    hello: String,
+    greeting: String
   }
 `);
 
@@ -12,12 +13,15 @@ var rootValue = {
   hello: () => {
     return 'Hello world!';
   },
+  greeting: () => {
+    return 'Good morning';
+  }
 };
 
 // Run the GraphQL query '{ hello }' and print out the response
 graphql({
   schema,
-  source: '{ hello }',
+  source: '{ greeting }',
   rootValue
 }).then((response) => {
   console.log(response);
